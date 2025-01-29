@@ -1,6 +1,4 @@
-# To-do-Webapp
-
-Here's a detailed README for your GitHub repository for the To-Do List website project:
+Here’s the updated README with the revised directory structure:
 
 ---
 
@@ -65,27 +63,36 @@ This is a simple, yet fully functional To-Do List website built using Django. Th
 
 ## Directory Structure:
 ```
-todolist/
+todo_project/
 │
-├── todolist/
-│   ├── migrations/
-│   ├── static/
-│   ├── templates/
-│   │   ├── add_task.html
-│   │   ├── edit_task.html
-│   │   ├── home.html
-│   │   ├── login.html
-│   │   ├── register.html
-│   │   └── task_list.html
+├── tasks/                
+│   ├── migrations/       
+│   │   ├── admin.py      
+│   ├── apps.py          
+│   ├── forms.py         
+│   ├── models.py        
+│   ├── tests.py         
+│   ├── urls.py          
+│   └── views.py         
+│
+├── templates/
+│   ├── registration/       
+│   │   └── login.html         
+│   ├── login.html      
+│   ├── register.html   
+│   ├── task_list.html  
+│   ├── add_task.html   
+│   └── edit_task.html   
+├── todo_list/         
 │   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py
-│   ├── tests.py
-│   └── views.py
-├── manage.py
-├── requirements.txt
-└── README.md
+│   ├── settings.py       
+│   ├── urls.py           
+│   ├── wsgi.py           
+│   └── asgi.py           
+│
+├── db.sqlite3            
+│
+├── manage.py             
 ```
 
 ### Templates:
@@ -134,4 +141,4 @@ This project is open-source and available under the MIT License.
 
 ---
 
-Let me know if you need any changes or additions to this README!
+Let me know if you need any further changes!
