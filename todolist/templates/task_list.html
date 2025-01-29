@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            animation: slideIn 1s ease-out;
+        }
+
+        .filter-links {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-links a {
+            margin: 0 15px;
+            color: #007BFF;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .filter-links a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .task-list {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-list li {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .task-list li a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .task-list li a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        .task-actions {
+            margin-top: 10px;
+        }
+
+        .btn-add-task {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-add-task:hover {
+            background-color: #45a049;
+        }
+
+        .logout-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logout-link:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Your Tasks</h2>
+
+        <div class="filter-links">
+            <a href="?filter=all" {% if filter_type == 'all' %}style="font-weight: bold;"{% endif %}>All Tasks</a> |
+            <a href="?filter=completed" {% if filter_type == 'completed' %}style="font-weight: bold;"{% endif %}>Completed</a> |
+            <a href="?filter=not_completed" {% if filter_type == 'not_completed' %}style="font-weight: bold;"{% endif %}>Not Completed</a>
+        </div>
+
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li>
+                    {{ task.title }} 
+                    {% if task.completed %}
+                        ✅ Done
+                    {% else %}
+                        ❌ Not Done
+                    {% endif %}
+                    <div class="task-actions">
+                        <a href="{% url 'mark_done' task.id %}">Mark as Done</a> |
+                        <a href="{% url 'delete_task' task.id %}">Delete</a> |
+                        <a href="{% url 'edit_task' task.id %}">Edit</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <a href="{% url 'add_task' %}" class="btn-add-task">Add New Task</a>
+        <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+    </div>
+</body>
+</html>
